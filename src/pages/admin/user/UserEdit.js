@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { userService } from '@/_services';
+import { userService } from '../../../_services/user.service';
 
 
 

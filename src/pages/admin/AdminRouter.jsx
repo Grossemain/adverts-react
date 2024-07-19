@@ -1,10 +1,9 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom"
+import { ALayout, Dashboard } from '../admin'
+import { User, UEdit, UAdd } from '../admin/user'
 
-import { ALayout, Dashboard } from './pages/admin'
-import { User, UEdit, UAdd } from './pages/admin/user'
-
-import Error from './_utils/Error'
+import Error from '../../_utils/Error'
 
 const AdminRouter = () => {
     return (

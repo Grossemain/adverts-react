@@ -1,26 +1,16 @@
 import React from 'react';
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route } from 'react-router-dom'
+import Login from '../auth/Login'
+import Error from '../../_utils/Error'
 
-import { ALayout, Dashboard } from '/pages/Admin'
-import { User, UEdit, UAdd } from '/pages/Admin/User'
-
-import Error from '/_utils/Error'
-
-const AdminRouter = () => {
+const AuthRouter = () => {
     return (
         <Routes>
-            <Route element={<ALayout/>}>
-                <Route index element={<Dashboard/>}/>
-                <Route path="dashboard" element={<Dashboard/>}/>
-                <Route path="user">
-                    <Route path="index" element={<User/>}/>
-                    <Route path="edit/:uid" element={<UEdit/>}/>
-                    <Route path="add" element={<UAdd/>}/>
-                </Route>
-                <Route path="*" element={<Error/>}/>
-            </Route>
+            <Route index element={<Login/>}/>
+            <Route path="login" element={<Login/>}/>
+            <Route path="*" element={<Error/>}/>
         </Routes>
     );
 };
 
-export default AdminRouter;
+export default AuthRouter;
