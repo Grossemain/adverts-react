@@ -3,7 +3,7 @@ import { accountService } from './account.service'
 
 // Paramétrage de base d'axios
 const Axios = axios.create({
-    baseURL: 'http://localhost:8888'
+    baseURL: 'http://127.0.0.1:8000'
 })
 
 

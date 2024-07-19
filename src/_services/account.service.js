@@ -7,7 +7,7 @@ import jwt_decode from 'jwt-decode'
  * @returns {Promise}
  */
 let login = (credentials) => {
-    return Axios.post('/auth/login', credentials)
+    return Axios.post('/api/login', credentials)
 }
 
 /**
@@ -50,7 +50,7 @@ let getTokenInfo = () => {
     return jwt_decode(getToken())
 }
 
-// Déclaration des serivces pour import
+// Déclaration des services pour import
 export const accountService = {
     login, saveToken, logout, isLogged, getToken, getTokenInfo
 }
