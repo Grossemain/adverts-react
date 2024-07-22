@@ -32,14 +32,6 @@ const UserCreate = () => {
                     <input type="text" name="nom" onChange={onChange} />
                 </div>
                 <div className="group">
-                    <label htmlFor="prenom">Prénom</label>
-                    <input type="text" name="prenom" onChange={onChange} />
-                </div>
-                <div className="group">
-                    <label htmlFor="pseudo">Pseudo</label>
-                    <input type="text" name="pseudo" onChange={onChange} />
-                </div>
-                <div className="group">
                     <label htmlFor="email">Email</label>
                     <input type="text" name="email" onChange={onChange} />
                 </div>

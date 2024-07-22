@@ -53,14 +53,6 @@ const UserEdit = () => {
                     <input type="text" name="nom" value={user.nom} onChange={onChange} />
                 </div>
                 <div className="group">
-                    <label htmlFor="prenom">Prénom</label>
-                    <input type="text" name="prenom" value={user.prenom} onChange={onChange} />
-                </div>
-                <div className="group">
-                    <label htmlFor="pseudo">Pseudo</label>
-                    <input type="text" name="pseudo" value={user.pseudo} onChange={onChange} />
-                </div>
-                <div className="group">
                     <label htmlFor="email">Email</label>
                     <input type="text" name="email" value={user.email} onChange={onChange} />
                 </div>

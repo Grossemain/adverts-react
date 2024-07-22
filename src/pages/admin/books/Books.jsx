@@ -3,50 +3,54 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import Menu from "../../components/Menu";
+
 import axios from "axios";
 // import RechercheForm from "../../components/RechercheForm";
 
-const Adverts = () => {
-    const [Adverts, setAdverts] = useState([]);
-    const [editingAdvert, setEditingAdvert] = useState(null);
+const Books = () => {
+    const [Books, setBooks] = useState([]);
+    const [editingBook, setEditingBook] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    const [viewingAdvert, setViewingAdvert] = useState(null);
+    const [viewingBook, setViewingBook] = useState(null);
     const [showViewModal, setShowViewModal] = useState(false);
     const [formValues, setFormValues] = useState({
-        advert_name: '',
-        img: '',
-        advert_description: '',
-        selling_price: '',
+        title: '',
+        author: '',
+        description: '',
+        edition: '',
+        purchase_price: '',
+        is_for_sale: false,
     });
 
     useEffect(() => {
-        displayAdverts();
+        displayBooks();
     }, []); // Sans les crochets ça tourne en boucle
 
-    const displayAdverts = async () => {
-        await axios.get("http://127.0.0.1:8000/api/adverts").then((res) => {
-            setAdverts(res.data);
+    const displayBooks = async () => {
+        await axios.get("http://127.0.0.1:8000/api/books").then((res) => {
+            setBooks(res.data);
         });
     };
 
-    const deleteAdvert = (id) => {
-        axios.delete(`http://127.0.0.1:8000/api/adverts/${id}`).then(displayAdverts);
+    const deleteBook = (id) => {
+        axios.delete(`http://127.0.0.1:8000/api/books/${id}`).then(displayBooks);
     };
 
-    const handleEditClick = (Advert) => {
-        setEditingAdvert(Advert);
+    const handleEditClick = (book) => {
+        setEditingBook(book);
         setFormValues({
-            advert_name: Advert.advert_name,
-            img: Advert.img,
-            advert_description: Advert.advert_description,
-            selling_price: Advert.selling_price,
+            title: book.title,
+            author: book.author,
+            description: book.description,
+            edition: book.edition,
+            purchase_price: book.purchase_price,
+            is_for_sale: book.is_for_sale,
         });
         setShowModal(true);
     };
 
-    const handleViewClick = (Advert) => {
-        setViewingAdvert(Advert);
+    const handleViewClick = (book) => {
+        setViewingBook(book);
         setShowViewModal(true);
     };
 
@@ -58,43 +62,40 @@ const Adverts = () => {
         });
     };
 
-    const saveAdvert = () => {
-        axios.put(`http://127.0.0.1:8000/api/adverts/${editingAdvert.id}`, formValues)
+    const saveBook = () => {
+        axios.put(`http://127.0.0.1:8000/api/books/${editingBook.id}`, formValues)
             .then(() => {
                 setShowModal(false);
-                setEditingAdvert(null);
-                displayAdverts();
+                setEditingBook(null);
+                displayBooks();
             });
     };
 
     return (
         <div>
-            <Menu />
             {/* <RechercheForm/> */}
             <div className="container mt-5">
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>Nom de l'annonce</th>
-                            <th>image</th>
-                            {/* <th>Description</th> */}
-                            <th>Prix de vente</th>
+                            <th>Nom du livre</th>
+                            <th>Auteur du livre</th>
+                            <th>En vente</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {Adverts.map((Advert) => (
-                            <tr key={Advert.id}>
-                                <td>{Advert.advert_name}</td>
-                                <td>{Advert.img}</td>
-                                {/* <td>{Advert.advert_description}</td> */}
-                                <td>{Advert.selling_price}</td>
+                        {Books.map((Book) => (
+                            <tr key={Book.id}>
+                                <td>{Book.title}</td>
+                                <td>{Book.author}</td>
+                                <td>{Book.is_for_sale ? "Oui" : "Non"}</td>
                                 <td>
                                     <span className="m-1">
                                         <Button
                                             variant="success"
                                             onClick={() => {
-                                                handleViewClick(Advert);
+                                                handleViewClick(Book);
                                             }}
                                         >
                                             Voir
@@ -105,7 +106,7 @@ const Adverts = () => {
                                         <Button
                                             variant="primary"
                                             onClick={() => {
-                                                handleEditClick(Advert);
+                                                handleEditClick(Book);
                                             }}
                                         >
                                             Edit
@@ -116,7 +117,7 @@ const Adverts = () => {
                                         <Button
                                             variant="danger"
                                             onClick={() => {
-                                                deleteAdvert(Advert.id);
+                                                deleteBook(Book.id);
                                             }}
                                         >
                                             Supprimer
@@ -129,18 +130,20 @@ const Adverts = () => {
                     </tbody>
                 </Table>
 
-                {/* Modal for viewing Advert details */}
+                {/* Modal for viewing book details */}
                 <Modal show={showViewModal} onHide={() => setShowViewModal(false)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Détails de l'annonce</Modal.Title>
+                        <Modal.Title>Détails du livre</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {viewingAdvert && (
+                        {viewingBook && (
                             <div>
-                                <p><strong>Nom de l'annonce:</strong> {viewingAdvert.advert_name}</p>
-                                <p><strong>image :</strong> {viewingAdvert.img}</p>
-                                <p><strong>description:</strong> {viewingAdvert.advert_description}</p>
-                                <p className="bg-success"><strong>Prix de vente:</strong> {viewingAdvert.selling_price}</p>
+                                <p><strong>Nom du livre:</strong> {viewingBook.title}</p>
+                                <p><strong>Auteur du livre:</strong> {viewingBook.author}</p>
+                                <p><strong>description du livre:</strong> {viewingBook.description}</p>
+                                <p><strong>Edition du livre:</strong> {viewingBook.edition}</p>
+                                <p className="bg-warning"><strong>Prix d'achat:</strong> {viewingBook.purchase_price}</p>
+                                <p><strong>En vente:</strong> {viewingBook.is_for_sale ? "Oui" : "Non"}</p>
                             </div>
                         )}
                     </Modal.Body>
@@ -152,53 +155,72 @@ const Adverts = () => {
                 </Modal>
 
 
-                {/* Modal for editing Advert details */}
+                {/* Modal for editing book details */}
                 <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Éditer l'annonce'</Modal.Title>
+                        <Modal.Title>Éditer le livre</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
                             <Form.Group>
-                                <Form.Label>Nom de l'annonce</Form.Label>
+                                <Form.Label>Nom du livre</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    name="advert_name"
-                                    value={formValues.advert_name}
+                                    name="title"
+                                    value={formValues.title}
                                     onChange={handleFormChange}
                                 />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Image</Form.Label>
+                                <Form.Label>Auteur du livre</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    name="img"
-                                    value={formValues.img}
+                                    name="author"
+                                    value={formValues.author}
                                     onChange={handleFormChange}
                                 />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label>Description du livre</Form.Label>
                                 <Form.Control
-                                    type="textarea"
-                                    name="advert_description"
-                                    value={formValues.advert_description}
+                                    as="textarea" rows={4}
+                                    name="description"
+                                    value={formValues.description}
                                     onChange={handleFormChange}
                                 />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Prix de vente</Form.Label>
+                                <Form.Label>Edition du livre</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    name="selling_price"
-                                    value={formValues.selling_price}
+                                    name="edition"
+                                    value={formValues.edition}
                                     onChange={handleFormChange}
                                 />
                             </Form.Group>
 
+                            <Form.Group>
+                                <Form.Label>Prix d'achat</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="purchase_price"
+                                    value={formValues.purchase_price}
+                                    onChange={handleFormChange}
+                                />
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Check
+                                    type="checkbox"
+                                    label="En vente"
+                                    name="is_for_sale"
+                                    checked={formValues.is_for_sale}
+                                    onChange={handleFormChange}
+                                />
+                            </Form.Group>
                         </Form>
                     </Modal.Body>
 
@@ -206,7 +228,7 @@ const Adverts = () => {
                         <Button variant="secondary" onClick={() => setShowModal(false)}>
                             Annuler
                         </Button>
-                        <Button variant="primary" onClick={saveAdvert}>
+                        <Button variant="primary" onClick={saveBook}>
                             Sauvegarder
                         </Button>
                     </Modal.Footer>
@@ -216,4 +238,4 @@ const Adverts = () => {
     );
 };
 
-export default Adverts;
+export default Books;

@@ -30,7 +30,9 @@ let logout = () => {
  * @returns {boolean}
  */
 let isLogged = () => {
-    let token = localStorage.getItem('token')
+    let token = localStorage.getItem('access_token')
+    console.log(token);
+
     return !!token
 }
 
@@ -46,11 +48,11 @@ let getToken = () => {
  * Récupération du payload du tkoen
  * @returns {object}
  */
-let getTokenInfo = () => {
-    return jwt_decode(getToken())
-}
+// let getTokenInfo = () => {
+//     return jwt_decode(getToken())
+// }
 
 // Déclaration des services pour import
 export const accountService = {
-    login, saveToken, logout, isLogged, getToken, getTokenInfo
+    login, saveToken, logout, isLogged, getToken
 }

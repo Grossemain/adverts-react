@@ -1,20 +1,40 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
-
-import './header.css'
+import React from "react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Header = () => {
     return (
-        <header className="pheader">
-            <nav>
-                <ul>
-                    <li><Link to="home">Accueil</Link></li>
-                    <li><Link to="service">Service</Link></li>
-                    <li><Link to="contact">Contact</Link></li>| 
-                    <li><Link to="admin">&nbsp;Admin</Link></li>
-                </ul>
-            </nav>
-        </header>
+        <div>
+            <Navbar bg="light" expand="lg">
+                <Container fluid>
+                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Collapse id="navbarScroll">
+                        <Nav
+                            className="me-auto my-2 my-lg-0"
+                            style={{ maxHeight: "100px" }}
+                            navbarScroll
+                        >
+                            <Nav.Link href="/home">Accueil</Nav.Link>
+                            <NavDropdown title="Annonces" id="navbarScrollingDropdown">
+                                <NavDropdown.Item href="/adverts">
+                                    Liste des annonces
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown title="Compte" id="navbarScrollingDropdown">
+                                <NavDropdown.Item href="/auth/login">
+                                    Connection
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/register">
+                                    Créer compte
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>         
+        </div>
     );
 };
 

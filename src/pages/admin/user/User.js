@@ -40,7 +40,6 @@ const User = () => {
                         <th></th>
                         <th>#</th>
                         <th>Nom</th>
-                        <th>Prénom</th>
                         <th>Email</th>
                         <th>Created</th>
                     </tr>
@@ -51,8 +50,7 @@ const User = () => {
                             <tr key={user.id}>
                                 <td><span className='del_ubtn' onClick={() => delUser(user.id)}>X</span></td>
                                 <td><Link to={`/admin/user/edit/${user.id}`}>{user.id}</Link></td>
-                                <td>{user.nom}</td>
-                                <td>{user.prenom}</td>
+                                <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.createdAt}</td>
                             </tr>
