@@ -15,7 +15,7 @@ let login = (credentials) => {
  * @param {string} token 
  */
 let saveToken = (token) => {
-    localStorage.setItem('token', token)
+    localStorage.setItem('token',(token));
 }
 
 /**
@@ -30,7 +30,7 @@ let logout = () => {
  * @returns {boolean}
  */
 let isLogged = () => {
-    let token = localStorage.getItem('access_token')
+    let token = localStorage.getItem('token')
     console.log(token);
 
     return !!token
@@ -45,7 +45,7 @@ let getToken = () => {
 }
 
 /**
- * Récupération du payload du tkoen
+ * Récupération du payload du token
  * @returns {object}
  */
 // let getTokenInfo = () => {
@@ -54,5 +54,5 @@ let getToken = () => {
 
 // Déclaration des services pour import
 export const accountService = {
-    login, saveToken, logout, isLogged, getToken
+    login, saveToken, logout, isLogged, getToken,
 }

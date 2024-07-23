@@ -14,8 +14,8 @@ const SideMenu = () => {
           <Nav defaultActiveKey="/home" className="flex-column">
             <Nav.Link href="/admin/dashboard">Dashboard</Nav.Link>
             <span>UTILISATEURS</span>
-            <Nav.Link href="/admin/user/index">Liste des utilisateurs</Nav.Link>
-            <Nav.Link href="/admin/user/add">ajouter un utilisateur</Nav.Link>
+            <Nav.Link href="/admin/users/index">Liste des utilisateurs</Nav.Link>
+            <Nav.Link href="/admin/users/add">ajouter un utilisateur</Nav.Link>
             <span>LIVRES</span>
             <Nav.Link href="/admin/books/index">Liste des Livres</Nav.Link>
             <Nav.Link href="/admin/books/create">Ajout de Livre</Nav.Link>

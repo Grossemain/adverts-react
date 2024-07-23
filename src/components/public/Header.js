@@ -29,7 +29,11 @@ const Header = () => {
                                 <NavDropdown.Item href="/register">
                                     Créer compte
                                 </NavDropdown.Item>
+                                <NavDropdown.Item href="/admin/dashboard" className="bg-dark text-light">
+                                    Admin
+                                </NavDropdown.Item>
                             </NavDropdown>
+
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

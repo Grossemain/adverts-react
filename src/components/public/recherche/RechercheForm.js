@@ -26,7 +26,7 @@ const RechercheForm = () => {
     setHasSearched(true);
 
     // Renseigner l'url de l'api
-    const apiUrl = `http://127.0.0.1:8000/api/books/search?search=${searchQuery}`;
+    const apiUrl = `http://127.0.0.1:8000/api/adverts/search?search=${searchQuery}`;
     console.log(results);
     try {
       const response = await fetch(apiUrl, {
@@ -62,7 +62,7 @@ const RechercheForm = () => {
                       type="text"
                       value={searchQuery}
                       onChange={handleInputChange}
-                      placeholder="Rechercher un livre"
+                      placeholder="Rechercher une annonce"
                       className=" mr-sm-2 rounded-pill border-0 "
                     />
                   </div>
@@ -82,8 +82,8 @@ const RechercheForm = () => {
             <Col>
               {results.length > 0 ? (
                 <div className= "row row-cols-1 row-cols-md-3 g-4 m-3 rounded-3 mt-4">
-                  {results.map((book, index) => (
-                    <ResultatCard key={index} book={book}/>
+                  {results.map((advert, index) => (
+                    <ResultatCard key={index} advert={advert}/>
                   ))}
                 </div>
               ) : (
